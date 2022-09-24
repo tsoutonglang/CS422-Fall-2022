@@ -1,0 +1,37 @@
+---
+title: "CS 422 Homework 0"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+author: Tania Soutonglang
+---
+
+### Part 1-A
+```{r}
+setwd("C:/Users/tsout/OneDrive/Desktop/cs422/homework0")
+
+data(cars)
+cars
+```
+
+### Part 1-B.
+
+```{r}
+plot(cars, main="Cars Scatterplot")
+plot(cars, type="o", main="Cars Line Graph")
+```
+
+### Part 1-C (Summary)
+```{r}
+summary(cars)
+```
+
+### Part 1-D
+```{r}
+max.speed <- 25.0
+min.dist  <- 2.00
+str <- paste0("Maximum speed is ", max.speed, ", and minimum distance is ", 
+              min.dist)
+str
+```

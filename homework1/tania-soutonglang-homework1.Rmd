@@ -1,0 +1,69 @@
+---
+title: "CS 422 Homework 1"
+author: "Tania Soutonglang"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+### Part 2.1-i
+```{r}
+setwd("C:/Users/tsout/OneDrive/Desktop/cs422/homework1")
+library(dplyr)
+
+data.df <-read.csv("us-covid.csv", header=TRUE, comment="#")
+```
+
+### Part 2.1-ii
+```{r}
+data.df <- data.df %>% select(state, level, total_cases, confirmed, probable, cases_last_7_days, case_rate_per_100K, total_deaths)
+```
+
+### Part 2.1-iii-a
+```{r}
+data.df <- arrange(data.df, desc(total_cases))
+
+print(head(data.df, 6))
+```
+
+### Part 2.1-iii-b
+```{r}
+print(tail(data.df, 6))
+```
+
+### Part 2.1-iv
+```{r}
+library(psych)
+pairs.panels(data.df %>% select(total_cases, confirmed, probable, cases_last_7_days, case_rate_per_100K, total_deaths), cor = TRUE)
+```
+
+### Part 2.1-iv-a
+The state column is used as identifyer for the data so it is not meant to be compared to the other rows in that column. The level column could also be skipped since the values within that column are all the same.
+
+### Part 2.1-iv-b
+total_cases and total_deaths have the highest correlation.
+
+### Part 2.1-iv-c
+cases_last_7_days and case_rate_per_100k have the lowest correlation
+
+### Part 2.1-v-a
+```{r}
+# library(ggplot2)
+
+# plot(x=data.df$total_deaths, y=data.df$confirmed, xlab="Total Deaths", ylab="Confirmed Cases", main="U.S. Covid-19 Cases")
+# plot(x=data.df$total_deaths, y=data.df$probable, xlab="Total Deaths", ylab="Probable Cases", main="U.S. Covid-19 Cases")
+
+matplot(data.df, type = c("b"),pch=19,col = 4:5, xlab="Total Deaths",ylab="Cases", main="U.S. Covid-19 Cases")
+legend("topright", legend = 4:5, col=4:5, pch=19)
+```
+
+### Part 2.1-v-b
+This anomoly appears to be when the number of probable and confirmed cases were at the peak
+
+### Part 2.1-v-c
+```{r}
+print(data.df%>%filter(state=="California"))
+```
