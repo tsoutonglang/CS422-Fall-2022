@@ -24,7 +24,7 @@ test.df <- Auto[-index, ]
 ### 2.1-a
 
 ```{r}
-autoModel <- lm(mpg ~ . -name, data = test.df)
+autoModel <- lm(mpg ~ . -name, data = train.df)
 ```
 
 #### 2.1-a-i
@@ -38,12 +38,11 @@ summary(autoModel)
 
 rss <- round(sum(autoModel$residuals^2), digit = 2)
 
-# rse <- round(sqrt(mean(autoModel$residuals^2)), digit = 2)
-
 rmse <- round(sqrt(mean(autoModel$residuals^2)), digit = 2)
 rmse
 
-str <- cat(paste0("R-sq value is 0.93\nAdjusted R-sq value is 0.92\nRSE is 2.47\nRMSE is ", rmse))
+str <- cat(paste0("R-sq value is 0.93\nAdjusted R-sq value is 0.92\nRSE is 3.37\nRMSE is ", rmse))
+str
 ```
 
 #### 2.1-a-iii
@@ -60,15 +59,15 @@ plot(fitted(autoModel), autoRes, main = "2.1-a-iii Auto Model Residuals", xlab =
 hist(autoRes, main = "2.1-a-iv Auto Module Residuals", xlab = "Residuals")
 ```
 
-This histogram does not follow a Gaussian distribution. The distribution of the residuals are primarily either below the regression line or near/on the regression line.
+This histogram does follow a Gaussian distribution. The distribution of the residuals are primarily on or slightly below the regression line.
 
 ### 2.1-b
 #### 2.1-b-i
 
-According to the regression model made in part (a), weight, year, and acceleration are statistically significant.
+According to the regression model made in part (a), weight, year, and origin are statistically significant.
 
 ```{r}
-autoNewModel <- lm(mpg ~ weight + year + acceleration, data = test.df)
+autoNewModel <- lm(mpg ~ weight + year + origin, data = train.df)
 ```
 
 #### 2.1-b-ii
@@ -78,7 +77,7 @@ summary(autoNewModel)
 
 rmse <- round(sqrt(mean(autoNewModel$residuals^2)), digits = 2)
 
-str <- cat(paste0("R-sq value is 0.93\nRSE is 2.30\nRMSE is ", rmse))
+str <- cat(paste0("R-sq value is 0.93\nRSE is 3.39\nRMSE is ", rmse))
 ```
 
 The new model's values of R2, RSE, and RMSE did not change too much from the original model.
@@ -97,7 +96,7 @@ plot(fitted(autoNewModel), autoNewRes, main = "2.1-b-iii Auto Model Residuals", 
 hist(autoNewRes, main = "2.1-b-iv Auto Module Residuals", xlab = "Residuals")
 ```
 
-This histogram does not follow a Gaussian distribution. The distribution of the residuals are vary a lot throughout the model.
+This histogram follows a Gaussian distribution. The distribution of the residuals show that the values primarily fall below the regression line or on it.
 
 #### 2.1-b-v
 The new model would be better since the data is more centralized towards the attributes with significantly smaller p-values, indicating a smaller margin of error in the data.
@@ -107,7 +106,7 @@ The new model would be better since the data is more centralized towards the att
 library(dplyr)
 
 df <- data.frame(
-  Prediction = c(predict(autoNewModel)),
+  Prediction = c(predict(autoNewModel, test.df)),
   Response = c(test.df %>% select(mpg))
 )
 ```
@@ -115,7 +114,7 @@ df <- data.frame(
 ### 2.1-d
 ```{r}
 dfConfidence <- df
-ConfidenceInt <- predict(autoNewModel, interval = 'confidence')
+ConfidenceInt <- predict(autoNewModel, test.df, interval = 'confidence')
 
 my_fun <- function(x) {
   if (dfConfidence[x,2] > ConfidenceInt[x, 2]) {
@@ -145,7 +144,7 @@ str
 ### 2.1-e
 ```{r}
 dfPredict <- df
-PredictInt <- predict(autoNewModel, interval = 'predict')
+PredictInt <- predict(autoNewModel, test.df, interval = 'predict')
 
 my_fun <- function(x) {
   if (dfPredict[x,2] > PredictInt[x, 2]) {
@@ -174,7 +173,7 @@ str
 
 ### 2.1-f
 #### 2.1-f-i
-The results of (e) showed that all 20 rows had a match whereas (d) only had 16 matches.
+The results of (e) showed that 20 rows had a match whereas (d) only had 13 matches.
 
 #### 2.1-f-ii
 This was likely because the prediction interval would have accounted for the uncertainty for the future and any variations that may occur.
