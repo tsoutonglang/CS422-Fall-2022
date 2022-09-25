@@ -139,14 +139,14 @@
 \end{Shaded}
 
 \hypertarget{a-i}{%
-\subsubsection{2.1-a-i}\label{a-i}}
+\paragraph{2.1-a-i}\label{a-i}}
 
 Using name is not a good predictor because not all values in the data
 set would have a similar or the same pattern of letters to make a
 comparison without creating biased data.
 
 \hypertarget{a-ii}{%
-\subsubsection{2.1-a-ii}\label{a-ii}}
+\paragraph{2.1-a-ii}\label{a-ii}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -198,19 +198,19 @@ comparison without creating biased data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"R{-}sq value is 0.93}\SpecialCharTok{\textbackslash{}n}\StringTok{Adjusted R{-}sq value is 0.92}\SpecialCharTok{\textbackslash{}n}\StringTok{RSR is }\SpecialCharTok{\textbackslash{}n}\StringTok{RMSE is "}\NormalTok{, rmse))}
+\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"R{-}sq value is 0.93}\SpecialCharTok{\textbackslash{}n}\StringTok{Adjusted R{-}sq value is 0.92}\SpecialCharTok{\textbackslash{}n}\StringTok{RSE is 2.47}\SpecialCharTok{\textbackslash{}n}\StringTok{RMSE is "}\NormalTok{, rmse))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## R-sq value is 0.93
 ## Adjusted R-sq value is 0.92
-## RSR is 
+## RSE is 2.47
 ## RMSE is 1.91
 \end{verbatim}
 
 \hypertarget{a-iii}{%
-\subsubsection{2.1-a-iii}\label{a-iii}}
+\paragraph{2.1-a-iii}\label{a-iii}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -223,7 +223,7 @@ comparison without creating biased data.
 \includegraphics{tania-soutonglang-homework2_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \hypertarget{a-iv}{%
-\subsubsection{2.1-a-iv}\label{a-iv}}
+\paragraph{2.1-a-iv}\label{a-iv}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -237,8 +237,11 @@ This histogram does not follow a Gaussian distribution. The distribution
 of the residuals are primarily either below the regression line or
 near/on the regression line.
 
+\hypertarget{b}{%
+\subsubsection{2.1-b}\label{b}}
+
 \hypertarget{b-i}{%
-\subsubsection{2.1-b-i}\label{b-i}}
+\paragraph{2.1-b-i}\label{b-i}}
 
 According to the regression model made in part (a), weight, year, and
 acceleration are statistically significant.
@@ -250,7 +253,7 @@ acceleration are statistically significant.
 \end{Shaded}
 
 \hypertarget{b-ii}{%
-\subsubsection{2.1-b-ii}\label{b-ii}}
+\paragraph{2.1-b-ii}\label{b-ii}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -283,23 +286,23 @@ acceleration are statistically significant.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rmse }\OtherTok{\textless{}{-}} \FunctionTok{signif}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(autoNewModel}\SpecialCharTok{$}\NormalTok{residuals}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)), }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{rmse }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(autoNewModel}\SpecialCharTok{$}\NormalTok{residuals}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)), }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
 
-\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"R{-}sq value is 0.93}\SpecialCharTok{\textbackslash{}n}\StringTok{RSE is 2.3}\SpecialCharTok{\textbackslash{}n}\StringTok{RMSE is "}\NormalTok{, rmse))}
+\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{cat}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"R{-}sq value is 0.93}\SpecialCharTok{\textbackslash{}n}\StringTok{RSE is 2.30}\SpecialCharTok{\textbackslash{}n}\StringTok{RMSE is "}\NormalTok{, rmse))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## R-sq value is 0.93
-## RSE is 2.3
-## RMSE is 2.1
+## RSE is 2.30
+## RMSE is 2.05
 \end{verbatim}
 
 The new model's values of R2, RSE, and RMSE did not change too much from
 the original model.
 
 \hypertarget{b-iii}{%
-\subsubsection{2.1-b-iii}\label{b-iii}}
+\paragraph{2.1-b-iii}\label{b-iii}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -312,7 +315,7 @@ the original model.
 \includegraphics{tania-soutonglang-homework2_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \hypertarget{b-iv}{%
-\subsubsection{2.1-b-iv}\label{b-iv}}
+\paragraph{2.1-b-iv}\label{b-iv}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -326,7 +329,7 @@ This histogram does not follow a Gaussian distribution. The distribution
 of the residuals are vary a lot throughout the model.
 
 \hypertarget{b-v}{%
-\subsubsection{2.1-b-v}\label{b-v}}
+\paragraph{2.1-b-v}\label{b-v}}
 
 The new model would be better since the data is more centralized towards
 the attributes with significantly smaller p-values, indicating a smaller
@@ -337,19 +340,189 @@ margin of error in the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{predictions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{predict}\NormalTok{(autoNewModel))}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
 
-\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{()}
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Prediction =} \FunctionTok{c}\NormalTok{(}\FunctionTok{predict}\NormalTok{(autoNewModel)),}
+  \AttributeTok{Response =} \FunctionTok{c}\NormalTok{(test.df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(mpg))}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{d}{%
 \subsubsection{2.1-d}\label{d}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfConfidence }\OtherTok{\textless{}{-}}\NormalTok{ df}
+\NormalTok{ConfidenceInt }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(autoNewModel, }\AttributeTok{interval =} \StringTok{\textquotesingle{}confidence\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{my\_fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ (dfConfidence[x,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\textgreater{}}\NormalTok{ ConfidenceInt[x, }\DecValTok{2}\NormalTok{]) \{}
+    \ControlFlowTok{if}\NormalTok{ (dfConfidence[x,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\textless{}}\NormalTok{ ConfidenceInt[x, }\DecValTok{3}\NormalTok{]) \{}
+      \FunctionTok{return}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    \} }\CommentTok{\# response in CI}
+    \ControlFlowTok{else}\NormalTok{ \{}
+      \FunctionTok{return}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{    \} }\CommentTok{\# response not in CI}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{\{}
+    \FunctionTok{return}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{  \} }\CommentTok{\# response not in CI}
+\NormalTok{\}}
+
+\NormalTok{Matches }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(dfConfidence)), my\_fun))}
+
+\NormalTok{dfConfidence[}\StringTok{\textquotesingle{}Lower\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(ConfidenceInt[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{dfConfidence[}\StringTok{\textquotesingle{}Upper\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(ConfidenceInt[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{dfConfidence[}\StringTok{\textquotesingle{}Matches\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ Matches}
+\NormalTok{dfConfidence}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Prediction  mpg     Lower    Upper Matches
+## 23   21.339620 25.0 18.254323 24.42492       0
+## 86   13.930956 13.0 11.898580 15.96333       1
+## 96    8.736859 12.0  5.682749 11.79097       0
+## 111  24.399086 22.0 22.339416 26.45876       1
+## 121  21.424336 19.0 19.728745 23.11993       1
+## 140  11.979166 14.0  9.605696 14.35264       1
+## 153  21.201592 19.0 19.983171 22.42001       1
+## 161  17.707759 17.0 14.432012 20.98351       1
+## 176  28.962350 29.0 26.710635 31.21406       1
+## 178  24.525828 23.0 23.165047 25.88661       1
+## 179  23.093796 23.0 21.723760 24.46383       1
+## 189  16.545042 16.0 14.440732 18.64935       1
+## 259  23.647798 20.6 22.150893 25.14470       1
+## 279  31.856051 31.5 30.138589 33.57351       1
+## 302  31.544304 34.2 29.484028 33.60458       0
+## 319  29.706805 29.8 28.033050 31.38056       1
+## 343  32.523676 30.0 30.113043 34.93431       1
+## 345  35.788717 39.0 33.760347 37.81709       0
+## 348  35.392370 37.0 32.885616 37.89912       1
+## 359  31.393888 31.6 29.112177 33.67560       1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Total observations correctly predicted: "}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(dfConfidence }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Matches }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)))}
+\NormalTok{str}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Total observations correctly predicted: 16"
+\end{verbatim}
+
 \hypertarget{e}{%
 \subsubsection{2.1-e}\label{e}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfPredict }\OtherTok{\textless{}{-}}\NormalTok{ df}
+\NormalTok{PredictInt }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(autoNewModel, }\AttributeTok{interval =} \StringTok{\textquotesingle{}predict\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in predict.lm(autoNewModel, interval = "predict"): predictions on current data refer to _future_ responses
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{ (dfPredict[x,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\textgreater{}}\NormalTok{ PredictInt[x, }\DecValTok{2}\NormalTok{]) \{}
+    \ControlFlowTok{if}\NormalTok{ (dfPredict[x,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\textless{}}\NormalTok{ PredictInt[x, }\DecValTok{3}\NormalTok{]) \{}
+      \FunctionTok{return}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    \} }\CommentTok{\# response in CI}
+    \ControlFlowTok{else}\NormalTok{ \{}
+      \FunctionTok{return}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{    \} }\CommentTok{\# response not in CI}
+\NormalTok{  \}}
+  \ControlFlowTok{else}\NormalTok{\{}
+    \FunctionTok{return}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{  \} }\CommentTok{\# response not in CI}
+\NormalTok{\}}
+
+\NormalTok{Matches }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(}\FunctionTok{seq\_len}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(dfPredict)), my\_fun))}
+
+\NormalTok{dfPredict[}\StringTok{\textquotesingle{}Lower\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(PredictInt[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{dfPredict[}\StringTok{\textquotesingle{}Upper\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(PredictInt[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{dfPredict[}\StringTok{\textquotesingle{}Matches\textquotesingle{}}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ Matches}
+\NormalTok{dfPredict}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Prediction  mpg     Lower    Upper Matches
+## 23   21.339620 25.0 15.575545 27.10370       1
+## 86   13.930956 13.0  8.654967 19.20694       1
+## 96    8.736859 12.0  2.989417 14.48430       1
+## 111  24.399086 22.0 19.112524 29.68565       1
+## 121  21.424336 19.0 16.268705 26.57997       1
+## 140  11.979166 14.0  6.562630 17.39570       1
+## 153  21.201592 19.0 16.182622 26.22056       1
+## 161  17.707759 17.0 11.839538 23.57598       1
+## 176  28.962350 29.0 23.598049 34.32665       1
+## 178  24.525828 23.0 19.470412 29.58124       1
+## 179  23.093796 23.0 18.035881 28.15171       1
+## 189  16.545042 16.0 11.240928 21.84916       1
+## 259  23.647798 20.6 18.554054 28.74154       1
+## 279  31.856051 31.5 26.693186 37.01892       1
+## 302  31.544304 34.2 26.257506 36.83110       1
+## 319  29.706805 29.8 24.558314 34.85530       1
+## 343  32.523676 30.0 27.090753 37.95660       1
+## 345  35.788717 39.0 30.514270 41.06316       1
+## 348  35.392370 37.0 29.916120 40.86862       1
+## 359  31.393888 31.6 26.016928 36.77085       1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{str }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Total observations correctly predicted: "}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(dfPredict }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Matches }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)))}
+\NormalTok{str}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Total observations correctly predicted: 20"
+\end{verbatim}
+
 \hypertarget{f}{%
 \subsubsection{2.1-f}\label{f}}
+
+\hypertarget{f-i}{%
+\paragraph{2.1-f-i}\label{f-i}}
+
+The results of (e) showed that all 20 rows had a match whereas (d) only
+had 16 matches.
+
+\hypertarget{f-ii}{%
+\paragraph{2.1-f-ii}\label{f-ii}}
+
+This was likely because the prediction interval would have accounted for
+the uncertainty for the future and any variations that may occur.
 
 \end{document}

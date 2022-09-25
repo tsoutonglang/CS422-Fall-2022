@@ -2,11 +2,11 @@
 title: "CS 422 Homework 2"
 author: "Tania Soutonglang"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
     toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ### 2.1
@@ -106,23 +106,75 @@ The new model would be better since the data is more centralized towards the att
 ```{r}
 library(dplyr)
 
-Predictions <- c(predict(autoNewModel))
-Mpg <- c(test.df %>% select(mpg))
-
-df <- data.frame(Predictions, Mpg)
-print(df)
+df <- data.frame(
+  Prediction = c(predict(autoNewModel)),
+  Response = c(test.df %>% select(mpg))
+)
 ```
 
 ### 2.1-d
 ```{r}
-predict(autoNewModel, interval = 'confidence')
+dfConfidence <- df
+ConfidenceInt <- predict(autoNewModel, interval = 'confidence')
 
-Match <- function(x) {if (x[2] > )}
-apply(df, 1, )
-df$Matches <- 
-df
+my_fun <- function(x) {
+  if (dfConfidence[x,2] > ConfidenceInt[x, 2]) {
+    if (dfConfidence[x,2] < ConfidenceInt[x, 3]) {
+      return(1)
+    } # response in CI
+    else {
+      return(0)
+    } # response not in CI
+  }
+  else{
+    return(1)
+  } # response not in CI
+}
+
+Matches <- c(sapply(seq_len(nrow(dfConfidence)), my_fun))
+
+dfConfidence['Lower'] <- c(ConfidenceInt[,2])
+dfConfidence['Upper'] <- c(ConfidenceInt[,3])
+dfConfidence['Matches'] <- Matches
+dfConfidence
+
+str <- paste0("Total observations correctly predicted: ", nrow(dfConfidence %>% filter(Matches == 1)))
+str
 ```
 
 ### 2.1-e
+```{r}
+dfPredict <- df
+PredictInt <- predict(autoNewModel, interval = 'predict')
+
+my_fun <- function(x) {
+  if (dfPredict[x,2] > PredictInt[x, 2]) {
+    if (dfPredict[x,2] < PredictInt[x, 3]) {
+      return(1)
+    } # response in CI
+    else {
+      return(0)
+    } # response not in CI
+  }
+  else{
+    return(1)
+  } # response not in CI
+}
+
+Matches <- c(sapply(seq_len(nrow(dfPredict)), my_fun))
+
+dfPredict['Lower'] <- c(PredictInt[,2])
+dfPredict['Upper'] <- c(PredictInt[,3])
+dfPredict['Matches'] <- Matches
+dfPredict
+
+str <- paste0("Total observations correctly predicted: ", nrow(dfPredict %>% filter(Matches == 1)))
+str
+```
 
 ### 2.1-f
+#### 2.1-f-i
+The results of (e) showed that all 20 rows had a match whereas (d) only had 16 matches.
+
+#### 2.1-f-ii
+This was likely because the prediction interval would have accounted for the uncertainty for the future and any variations that may occur.
