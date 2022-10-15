@@ -1,0 +1,184 @@
+---
+title: "CS 422 Homework 4"
+author: "Tania Soutonglang"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+```{r}
+setwd("C:\\Users\\tsout\\OneDrive\\Desktop\\cs422\\CS422-labs\\homework4")
+library(rpart)
+library(rpart.plot)
+library(dplyr)
+library(ROCR)
+library(caret)
+
+train.df <- read.csv("adult-train.csv", header=TRUE, comment="#")
+test.df <- read.csv("adult-test.csv", header=TRUE, comment="#")
+```
+
+### 2.1-a
+```{r}
+# Cleaning training data set
+sum(train.df$occupation == "?")
+
+trainClean <- which(train.df$occupation == "?")
+train.df <- slice(train.df, -trainClean)
+
+trainClean <- which(train.df$native_country == "?")
+train.df <- slice(train.df, -trainClean)
+
+sum(train.df$occupation == "?")
+
+# cleaning testing data set
+sum(test.df$occupation == "?")
+
+testClean <- which(test.df$occupation == "?")
+test.df <- slice(test.df, -testClean)
+
+testClean <- which(test.df$native_country == "?")
+test.df <- slice(test.df, -testClean)
+
+sum(test.df$occupation == "?")
+```
+### 2.1-b
+```{r}
+set.seed(1122)
+
+model <- rpart(income ~ ., data=train.df, method="class")
+
+summary(model)
+
+rpart.plot(model, extra=104, fallen.leaves=T, type=4, main="1994 U.S. Census")
+```
+#### 2.1-b-i
+```{r}
+print("relationship, martial_status, capital_gain")
+```
+#### 2.1-b-ii
+```{r}
+print("The first split was done on the relationship predictor. The left side has 16,292 observations and the right side has 13,869 observations.")
+```
+### 2.1-c
+#### 2.1-c-i
+```{r}
+predictions <- predict(model,test.df,type="class")
+confusionMatrix(predictions,as.factor(test.df$income))
+```
+
+```{r}
+sensitivity <- 0.9482
+specificity <- 0.5035
+balAcc <- round((sensitivity + specificity) / 2, digits = 3)
+cat(paste0("\nBalanced Accuracy: ", balAcc))
+```
+#### 2.1-c-ii
+```{r}
+balErr <- 1 - balAcc
+paste0("Balanced Error: ", balErr)
+```
+#### 2.1-c-iii
+```{r}
+cat(paste0("Sensitivity: ", round(sensitivity, digits = 3), "\nSpecificity: ", round(specificity, digits = 3)))
+```
+#### 2.1.c.iv
+```{r}
+predict.df <- data.frame(predictions, test.df$income)
+perd <- prediction(as.numeric(predict.df$predictions), predict.df$test.df.income)
+
+auc.tmp <- performance(perd,"auc")
+paste0("AUC: ", round(as.numeric(auc.tmp@y.values), digits = 3))
+
+perf <- performance(perd, "tpr","fpr")
+plot(perf, colorize=TRUE)
+```
+### 2.1-d
+```{r}
+printcp(model)
+```
+### 2.1-e
+#### 2.1-e-i
+```{r}
+set.seed(1122)
+
+table(train.df$income)
+income.df <- train.df$income
+```
+#### 2.1-e-ii
+```{r}
+new_train.df <- train.df
+
+# Extract "<=50K" observations
+new_train.df_rows <- sample( which(train.df$income == "<=50K"), 7508)
+new_train.df <- train.df[new_train.df_rows, ]
+
+# Extract ">50K" observations
+new_train.df_rows2 <- which(train.df$income == ">50K")
+new_train.df <- bind_rows(new_train.df, train.df[new_train.df_rows2, ])
+```
+#### 2.1-e-iii
+```{r}
+set.seed(1122)
+
+new_model <- rpart(income ~ ., data=new_train.df, method="class")
+
+summary(new_model)
+
+rpart.plot(new_model, extra=104, fallen.leaves=T, type=4, main="1994 U.S. Census")
+```
+##### 2.1-e-iii-i
+```{r}
+new_predictions <- predict(new_model,test.df,type="class")
+confusionMatrix(new_predictions,as.factor(test.df$income))
+```
+
+```{r}
+new_sensitivity <- 0.7423
+new_specificity <- 0.8673
+new_balAcc <- round((new_sensitivity + new_specificity) / 2, digits = 3)
+cat(paste0("\nBalanced Accuracy: ", new_balAcc))
+```
+##### 2.1-e-iii-ii
+```{r}
+new_balErr <- 1 - new_balAcc
+paste0("Balanced Error: ", new_balErr)
+```
+##### 2.1-e-iii-iii
+```{r}
+cat(paste0("Sensitivity: ", round(new_sensitivity, digits = 3), "\nSpecificity: ", round(new_specificity, digits = 3)))
+```
+##### 2.1-e-iii-iv
+What is the AUC of the ROC curve. Plot the ROC curve.
+```{r}
+new_predict.df <- data.frame(new_predictions, test.df$income)
+new_perd <- prediction(as.numeric(new_predict.df$new_predictions), new_predict.df$test.df.income)
+
+new_auc.tmp <- performance(new_perd,"auc")
+paste0("AUC: ", round(as.numeric(new_auc.tmp@y.values), digits = 3))
+
+new_perf <- performance(new_perd, "tpr","fpr")
+plot(new_perf, colorize=TRUE)
+```
+
+### 2.1-f
+Comment on the differences in the balanced accuracy, sensitivity, specificity, positive predictive value and AUC of the models used in (c) and (e).
+```{r}
+cat(paste0("-- 2.1-b model --
+           \nBalanced Accuracy: ", balAcc, 
+           "\nBalanced Error: ", balErr,
+           "\nSensitivity: ", round(sensitivity, digits = 3), 
+           "\nSpecificity: ", round(specificity, digits = 3), 
+           "\nAUC: ", round(as.numeric(auc.tmp@y.values), digits = 3)))
+
+cat(paste0("\n\n-- 2.1-e model --
+           \nBalanced Accuracy: ", new_balAcc, 
+           "\nBalanced Error: ", new_balErr,
+           "\nSensitivity: ", round(new_sensitivity, digits = 3), 
+           "\nSpecificity: ", round(new_specificity, digits = 3), 
+           "\nAUC: ", round(as.numeric(new_auc.tmp@y.values), digits = 3)))
+
+cat(paste0("\n\nThe new model created in part (e) has a higher balanced accuracy and therefore a lower balanced error rate compared to the model in part (b). The model in (b) had a higher sensitivity than (e), but (e) had a higher specificity than (b). The model in (e) has a higher AUC than the model in (b), so (e) has a higher change of getting more positive samples."))
+```

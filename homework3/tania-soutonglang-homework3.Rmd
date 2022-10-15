@@ -1,0 +1,51 @@
+---
+title: "CS 422 Homework 3"
+author: "Tania Soutonglang"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+## Training the Decision Tree
+```{r}
+library(rpart)
+library(rpart.plot)
+
+data(iris)
+head(iris)
+
+model <- rpart(Species ~ ., data=iris, method="class")
+summary(model)
+```
+
+## Build the Decision Tree
+```{r}
+rpart.plot(model, extra=104, fallen.leaves=T, type=4, main="Iris Dataset Decision Tree")
+```
+
+### 1.a
+```{r}
+print("There are three levels.")
+```
+
+### 1.b
+```{r}
+cat(print("Level 1, Vertex 1: Default class label is setosa\nLevel 2, Vertex 1: Default class label is setosa\nLevel 2, Vertex 2: Default class label is versicolor\nLevel 3, Vertex 1: Default class label is versicolor\nLevel 3, Vertex 1: Default class label is virginica"))
+```
+### 1.c
+```{r}
+cat(print("Level 1, split on attribute: Petal.Length\nSplit points: < 2.45 left subtree, ≥ 2.45 right subtree\n
+Level 2, split on attribute: Petal. Width\nSplit Points: < 0.8 left subtree, ≥ 0.8 right subtree"))
+```
+### 1.d
+#### 1.d-i
+```{r}
+print("The three numbers in the middle represented the probability of each flower species being in that vertex.")
+```
+
+#### 1.d-ii
+```{r}
+print("The last line signifies the amount of data that is in that vertex from the original dataframe.")
+```
