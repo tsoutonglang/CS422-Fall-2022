@@ -1,0 +1,133 @@
+---
+title: "CS 422 Homework 2"
+author: "Tania Soutonglang"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+```{r}
+setwd("C:\\Users\\tsout\\OneDrive\\Desktop\\cs422\\CS422-labs\\homework5")
+library(arules)
+
+# The first column is the transaction ID
+# the subsequent columns contain a list of purchased goods from the bakery represented by their product ID code
+
+products <- read.csv("products.csv", header=FALSE, comment="#")
+tr1k.df <- read.csv("tr-1k.csv", header=FALSE, comment="#")
+tr5k.df <- read.csv("tr-5k.csv", header=FALSE, comment="#")
+tr20k.df <- read.csv("tr-20k.csv", header=FALSE, comment="#")
+tr75k.df <- read.csv("tr-75k.csv", header=FALSE, comment="#")
+```
+
+### 2.1-a
+#### tr-1k
+```{r}
+# write to .csv
+write.csv(tr1k.df, "tr-1k-canonical.csv")
+
+# read .csv
+order_trans.1k <- read.transactions(
+  file = "tr-1k-canonical.csv", 
+  format = "basket",
+  sep = ",", 
+  rm.duplicates = T
+  )
+summary(order_trans.1k)
+```
+#### tr-5k
+```{r}
+# write to .csv
+write.csv(tr5k.df, "tr-5k-canonical.csv")
+
+# read .csv
+order_trans.5k <- read.transactions(
+  file = "tr-5k-canonical.csv", 
+  format = "basket",
+  sep = ",", 
+  rm.duplicates = T
+  )
+summary(order_trans.5k)
+```
+#### tr-20k
+```{r}
+# write to .csv
+write.csv(tr20k.df, "tr-20k-canonical.csv")
+
+# read .csv
+order_trans.20k <- read.transactions(
+  file = "tr-20k-canonical.csv", 
+  format = "basket",
+  sep = ",", 
+  rm.duplicates = T
+  )
+summary(order_trans.20k)
+```
+#### tr-75k
+```{r}
+# write to .csv
+write.csv(tr75k.df, "tr-75k-canonical.csv")
+
+# read .csv
+order_trans.75k <- read.transactions(
+  file = "tr-75k-canonical.csv", 
+  format = "basket",
+  sep = ",", 
+  rm.duplicates = T
+  )
+summary(order_trans.75k)
+```
+### 2.1-b
+#### tr-1k
+```{r}
+rules.1k <- apriori(order_trans.1k, parameter = list(support = 0.01, confidence = 0.90))
+tmp.1k <- apriori(order_trans.1k, parameter = list(support = 0.01, target = "frequent itemsets"))
+
+inspect(head(sort(tmp.1k, decreasing = T, by="count")))
+summary(rules.1k)
+inspect(head(rules.1k, by = "confidence"))
+```
+#### tr-5k
+```{r}
+rules.5k <- apriori(order_trans.5k, parameter = list(support = 0.01, confidence = 0.90))
+tmp.5k <- apriori(order_trans.5k, parameter = list(support = 0.01, target = "frequent itemsets"))
+
+inspect(head(sort(tmp.5k, decreasing = T, by="count")))
+summary(rules.5k)
+inspect(head(rules.5k, by = "confidence"))
+```
+#### tr-20k
+```{r}
+rules.20k <- apriori(order_trans.20k, parameter = list(support = 0.01, confidence = 0.90))
+tmp.20k <- apriori(order_trans.20k, parameter = list(support = 0.01, target = "frequent itemsets"))
+
+inspect(head(sort(tmp.20k, decreasing = T, by="count")))
+summary(rules.20k)
+inspect(head(rules.20k, by = "confidence"))
+```
+#### tr-75k
+```{r}
+rules.75k <- apriori(order_trans.75k, parameter = list(support = 0.01, confidence = 0.90))
+tmp.75k <- apriori(order_trans.75k, parameter = list(support = 0.01, target = "frequent itemsets"))
+
+inspect(head(sort(tmp.75k, decreasing = T, by="count")))
+summary(rules.75k)
+inspect(head(rules.75k, by = "confidence"))
+```
+### 2.1-c
+```{r}
+paste0(cat("Compare the rules you obtained for each different subset (1,000 – 75,000 transactions). How does the number of transactions affect the results you observed?\n\nAs the number of transactions increased, the amount of association rules found increased since there was more data to compare to each other."))
+```
+### 2.1-d
+#### 2.1-d-a
+```{r}
+paste0(cat("What is the most frequently purchased item or itemset?"))
+inspect(head(sort(tmp.75k, decreasing = F, by="count")))
+```
+#### 2.1-d-b
+```{r}
+paste0(cat("What is the least frequently purchased item or itemset?"))
+inspect(head(sort(tmp.75k, decreasing = T, by="count")))
+```
