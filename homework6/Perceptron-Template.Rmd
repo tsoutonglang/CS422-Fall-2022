@@ -1,0 +1,51 @@
+---
+  title: "Homework 6, Problem 1"
+output: 
+  html_notebook:
+  toc: yes
+toc_float: yes
+author: Student Name
+---
+  
+rm(list=ls())
+
+# Set working directory as needed
+setwd("...")
+
+points <- read.csv("perceptron.csv")
+
+# The Perceptron function
+#
+# PARAMETERS:
+# points: The dataset that is to be separated
+# lamda:  The learning rate
+# gamma:  The error threshold
+#
+# RETURNS
+# A list containing three named elements.  The elements
+# should be named: 
+# "weights" - Contains the final weight vector (learned weights)
+# "epochs"  - Number of epochs it took to converge
+# "error"   - A vector of error calculated at the end of each epoch
+
+perceptron <- function(points, lamda, gamma) {
+
+# --- Your code goes below ---
+
+}
+
+# The sign function, this is the prediction function
+# PARAMETERS:
+# x : The X vector (input that needs to be predicted)
+# weights: The weight vector
+# RETURNS:
+# -1 or 1
+
+my_sign <- function(x, weights) {
+
+# --- Your code goes below ---
+
+}
+
+# MAIN ENTRY POINT
+

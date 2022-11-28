@@ -1,0 +1,45 @@
+---
+title: "CS 422 Homework 7"
+author: "Tania Soutonglang"
+output: 
+  html_notebook:
+  toc: yes
+toc_float: yes
+---
+```{r}
+library(keras)
+library(dplyr)
+library(caret)
+library(rpart)
+library(rpart.plot)
+
+rm(list=ls())
+
+# Set working directory as needed
+setwd("C:\\Users\\tsout\\OneDrive\\Desktop\\cs422\\CS422-labs\\homework7")
+
+df <- read.csv(...)
+
+# Seed the PRNG
+set.seed(1122)
+df <- df[sample(nrow(df)), ] # Shuffle, as all of the data in the .csv file
+                             # is ordered by label!  
+```
+
+
+```{r}
+# --- Your code goes below ---
+# (a)
+...
+
+# (b)
+# Note that in (b) either use a new variable to store the model, or null out
+# the variable that stored the model in (a) if you want to reuse that variable.
+# The reason is that if you don't null it out, the model in (b) will have
+# residual information left over from (a) and your results will not be quite
+# accurate.
+
+# (c) 
+
+# (d)
+```
